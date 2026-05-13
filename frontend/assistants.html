@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="106x106" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>AI Assistant Configuration - Suite Pilot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="dashboard layout-assistants">
+        <!-- Main Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="logo.png" alt="Aura Staff Logo" style="height: 32px; width: auto; object-fit: contain;">
+                <span>Suite Pilot</span>
+            </div>
+            <nav class="menu">
+                <a href="index.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-book"></i> Reservations</a>
+                <a href="#"><i class="fas fa-bed"></i> Rooms</a>
+                <a href="#"><i class="fas fa-cash-register"></i> POS</a>
+                <a href="#"><i class="fas fa-inbox"></i> Inbox</a>
+                <a href="#"><i class="fas fa-users"></i> Employee Directory</a>
+                <a href="#"><i class="fas fa-user-tag"></i> Guest Management</a>
+                <a href="logs.html"><i class="fas fa-chart-line"></i> Call Logs</a>
+                <a href="assistants.html" class="active"><i class="fas fa-robot"></i> AI & Automation</a>
+                <a href="phone_numbers.html"><i class="fas fa-phone"></i> Phone Numbers</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Reports</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Secondary Sidebar: Assistants List -->
+        <aside class="assistants-sidebar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Assistants">
+            </div>
+            <div class="assistants-list" id="assistants-list">
+                <!-- Populated by JS -->
+                <div class="assistant-item skeleton"></div>
+                <div class="assistant-item skeleton"></div>
+                <div class="assistant-item skeleton"></div>
+            </div>
+        </aside>
+
+        <!-- Main Configuration Panel -->
+        <main class="config-panel">
+            <header class="config-header">
+                <div>
+                    <h1>AI Assistant Configuration</h1>
+                    <p>Create, organize, and configure assistants for different use cases in one place.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-danger" id="btn-delete" disabled><i class="fas fa-trash"></i> Delete Assistant</button>
+                    <button class="btn btn-primary" id="btn-create" onclick="openCreateMode()"><i class="fas fa-plus"></i> Create Assistant</button>
+                </div>
+            </header>
+
+            <div class="config-content" id="config-content">
+                <h2 id="assistant-name-display">Select an Assistant</h2>
+                <p class="assistant-id" id="assistant-id-display">Or click 'Create Assistant' to build a new one.</p>
+
+                <div class="tabs">
+                    <div class="tab active">System</div>
+                    <div class="tab">Voice</div>
+                    <div class="tab">Transcriber</div>
+                    <div class="tab">Summary</div>
+                </div>
+
+                <div class="config-form">
+                    <div class="accordion open">
+                        <div class="accordion-header">
+                            <h3>System</h3>
+                            <i class="fas fa-chevron-up"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <form id="assistant-form">
+                                <div class="form-group">
+                                    <label>Assistant Name</label>
+                                    <input type="text" id="input-name" class="input-field"
+                                        placeholder="e.g., Food & Beverage Agent">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>First Message Mode</label>
+                                    <select id="input-first-msg-mode" class="input-field">
+                                        <option value="assistant-speaks-first">assistant-speaks-first</option>
+                                        <option value="user-speaks-first">user-speaks-first</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>First Message</label>
+                                    <textarea id="input-first-message" class="input-field" rows="2"
+                                        placeholder="The first thing the agent says..."></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>System Prompt</label>
+                                    <textarea id="input-system-prompt" class="input-field" rows="6"
+                                        placeholder="You are Daniel, the Food & Beverage AI assistant..."></textarea>
+                                </div>
+
+                                <div class="sliders-group">
+                                    <div class="slider-control">
+                                        <label>Max Tokens: <span id="val-tokens">250</span></label>
+                                        <input type="range" id="input-tokens" min="50" max="1000" value="250"
+                                            oninput="document.getElementById('val-tokens').textContent=this.value">
+                                    </div>
+                                    <div class="slider-control">
+                                        <label>Temperature: <span id="val-temp">0.7</span></label>
+                                        <input type="range" id="input-temp" min="0" max="1" step="0.1" value="0.7"
+                                            oninput="document.getElementById('val-temp').textContent=this.value">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions" id="form-actions" style="display: none;">
+                                    <button type="submit" class="btn btn-primary" id="btn-save">Publish
+                                        Assistant</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toast-message">Message</span>
+    </div>
+
+    <script src="js/assistants.js"></script>
+</body>
+
+</html>

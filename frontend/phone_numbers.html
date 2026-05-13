@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="76x76" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>Phone Numbers - Suite Pilot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="dashboard layout-assistants">
+        <!-- Main Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="logo.png" alt="Aura Staff Logo" style="height: 32px; width: auto; object-fit: contain;">
+                <span>Suite Pilot</span>
+            </div>
+            <nav class="menu">
+                <a href="index.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-book"></i> Reservations</a>
+                <a href="#"><i class="fas fa-bed"></i> Rooms</a>
+                <a href="#"><i class="fas fa-cash-register"></i> POS</a>
+                <a href="#"><i class="fas fa-inbox"></i> Inbox</a>
+                <a href="#"><i class="fas fa-users"></i> Employee Directory</a>
+                <a href="#"><i class="fas fa-user-tag"></i> Guest Management</a>
+                <a href="logs.html"><i class="fas fa-chart-line"></i> Call Logs</a>
+                <a href="assistants.html"><i class="fas fa-robot"></i> AI & Automation</a>
+                <a href="phone_numbers.html" class="active"><i class="fas fa-phone"></i> Phone Numbers</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Reports</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Secondary Sidebar: Phone Numbers List -->
+        <aside class="assistants-sidebar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search name, number...">
+            </div>
+            <div class="assistants-list" id="phone-numbers-list">
+                <!-- Populated by JS -->
+                <div class="assistant-item skeleton"></div>
+                <div class="assistant-item skeleton"></div>
+            </div>
+        </aside>
+
+        <!-- Main Configuration Panel -->
+        <main class="config-panel">
+            <header class="config-header">
+                <div>
+                    <h1>Phone Numbers</h1>
+                    <p>Import numbers and assign them to your assistants for inbound or outbound calling</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-danger" id="btn-delete" disabled><i class="fas fa-trash"></i> Delete Phone Number</button>
+                    <button class="btn btn-primary" id="btn-create" onclick="importPhoneNumber()"><i class="fas fa-plus"></i> Import Phone Number</button>
+                </div>
+            </header>
+
+            <div class="config-content" id="config-content" style="display: none;">
+
+                <form id="phone-number-form">
+
+                    <!-- Details Accordion -->
+                    <div class="accordion open">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3>Phone Number Details</h3>
+                            <i class="fas fa-chevron-up"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Give your
+                                phone number a descriptive name to help identify it in your list.</p>
+                            <div class="form-group">
+                                <label>Phone Number Label</label>
+                                <input type="text" id="input-label" class="input-field"
+                                    placeholder="e.g., Phone Number 1">
+                            </div>
+
+                            <div class="form-group"
+                                style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 1px solid var(--border-color);">
+                                <div>
+                                    <label style="margin-bottom: 0;">SMS Enabled</label>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                                        Enable or disable SMS messaging for this Twilio phone number</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="input-sms">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Server URL Accordion -->
+                    <div class="accordion open">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3>Phone Number Server URL</h3>
+                            <i class="fas fa-chevron-up"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Configure
+                                a custom server URL for this phone number.</p>
+                            <div class="form-group">
+                                <label>Server URL</label>
+                                <input type="text" id="input-server-url" class="input-field" placeholder="Server URL">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inbound Settings Accordion -->
+                    <div class="accordion open">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3>Inbound Settings</h3>
+                            <i class="fas fa-chevron-up"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Assign an
+                                assistant to handle inbound calls.</p>
+                            <div class="form-group">
+                                <label>Assistant</label>
+                                <select id="input-inbound-assistant" class="input-field">
+                                    <option value="">Select Assistant...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Fallback Destination</label>
+                                <input type="text" id="input-fallback" class="input-field" placeholder="+1234567890">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outbound Settings Accordion -->
+                    <div class="accordion open">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3>Outbound Settings</h3>
+                            <i class="fas fa-chevron-up"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Setup
+                                outbound calling by providing a customer number and selecting an assistant.</p>
+                            <div class="form-group">
+                                <label>Customer Phone Number</label>
+                                <input type="text" id="input-outbound-customer" class="input-field"
+                                    placeholder="+1234567890">
+                            </div>
+                            <div class="form-group">
+                                <label>Assistant for Outbound Call</label>
+                                <select id="input-outbound-assistant" class="input-field">
+                                    <option value="">Select Assistant...</option>
+                                </select>
+                            </div>
+                            <div class="form-actions" style="justify-content: flex-start;">
+                                <button type="button" class="btn btn-primary" id="btn-make-call"
+                                    onclick="makeOutboundCall()" style="margin-right: 1rem;"><i
+                                        class="fas fa-phone"></i> Make a Call</button>
+                                <button type="button" class="btn btn-secondary" disabled><i
+                                        class="fas fa-calendar-alt"></i> Schedule a call</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" id="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btn-save">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="no-selection-state" style="padding: 3rem; text-align: center; color: var(--text-secondary);">
+                <i class="fas fa-phone fa-3x" style="margin-bottom: 1rem; opacity: 0.5;"></i>
+                <h2>Select a Phone Number</h2>
+                <p>Or click 'Import Phone Number' to add a new one.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toast-message">Message</span>
+    </div>
+
+    <script src="js/phone_numbers.js"></script>
+</body>
+
+</html>

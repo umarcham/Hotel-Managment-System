@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="76x76" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>Suite Pilot - Hotel AI Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="logo.png" alt="Aura Staff Logo" style="height: 32px; width: auto; object-fit: contain;">
+                <span>Suite Pilot</span>
+            </div>
+            <nav class="menu">
+                <a href="#" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-book"></i> Reservations</a>
+                <a href="#"><i class="fas fa-broom"></i> Housekeeping</a>
+                <a href="#"><i class="fas fa-users"></i> Employee Directory</a>
+                <a href="#"><i class="fas fa-user-tag"></i> Guest Management</a>
+                <a href="logs.html"><i class="fas fa-chart-line"></i> Call Logs</a>
+                <a href="assistants.html"><i class="fas fa-robot"></i> AI & Automation</a>
+                <a href="phone_numbers.html"><i class="fas fa-phone"></i> Phone Numbers</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Reports</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Dashboard Overview</h1>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=38bdf8&color=fff" alt="User">
+                </div>
+            </header>
+
+            <section class="stats-grid" id="stats-grid">
+                <!-- Stats will be populated via JS -->
+                <div class="stat-card skeleton"></div>
+                <div class="stat-card skeleton"></div>
+                <div class="stat-card skeleton"></div>
+            </section>
+
+
+
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Recent AI Reservations</h2>
+                    <p>Live bookings captured by your AI assistants</p>
+                </div>
+                <div class="reservations-container">
+                    <div class="glass-table-wrapper">
+                        <table class="glass-table">
+                            <thead>
+                                <tr>
+                                    <th>Assistant</th>
+                                    <th>Guest</th>
+                                    <th>Dates</th>
+                                    <th>Room</th>
+                                    <th>Guests</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservations-list">
+                                <!-- Reservations will be populated here -->
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-secondary);">
+                                        <i class="fas fa-spinner fa-spin"></i> Waiting for new bookings...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Reservation Details Drawer -->
+    <div id="details-drawer" class="drawer">
+        <div class="drawer-header">
+            <h2>Reservation Details</h2>
+            <button class="btn-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-content" id="drawer-content">
+            <!-- Content will be populated by JS -->
+        </div>
+    </div>
+
+    <!-- Transcript Modal -->
+    <div id="transcript-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-alt"></i> Call Transcript</h2>
+                <button class="btn-close" onclick="closeTranscript()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="transcript-body" id="transcript-text">
+                <!-- Transcript will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toast-message">Message</span>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
