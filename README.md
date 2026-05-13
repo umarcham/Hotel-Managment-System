@@ -2,7 +2,7 @@
 
 Suite Pilot is a premium, automated hotel management dashboard that leverages cutting-edge AI agents to handle guest reservations over the phone. By combining **Vapi AI** for telephony and **Google Gemini 1.5 Flash** for intelligent data extraction, Suite Pilot provides a zero-touch booking experience with a stunning, modern glassmorphism interface.
 
-![Suite Pilot Dashboard](https://raw.githubusercontent.com/username/repo/main/screenshots/dashboard.png) *(Placeholder for your screenshot)*
+![Suite Pilot Dashboard](Dashboard.png)
 
 ## 🌟 Key Features
 
