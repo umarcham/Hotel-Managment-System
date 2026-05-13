@@ -7,7 +7,7 @@ Suite Pilot is a premium, automated hotel management dashboard that leverages cu
 ## 🌟 Key Features
 
 - **🤖 AI Voice Agents**: Fully autonomous AI assistants (Sophia, Ema, etc.) that handle inbound and outbound calls with natural human-like speech.
-- **🧠 LLM-Powered Extraction**: Uses Gemini 1.5 Flash to analyze call transcripts and extract structured data (Guest name, room type, dates, and special requests).
+- **🧠 LLM-Powered Extraction**: Uses Gemini 2.5 Flash to analyze call transcripts and extract structured data (Guest name, room type, dates, and special requests).
 - **📊 Real-Time Dashboard**: A high-end, glassmorphism UI for monitoring reservations, call stats, and agent performance.
 - **📑 Detailed Insights**: Deep-dive into every reservation with full call transcripts, duration tracking, and extracted "Extras" (Spa, Breakfast, Late checkout).
 - **📞 Management Center**: Centralized control for managing Vapi assistants and Twilio phone numbers.
